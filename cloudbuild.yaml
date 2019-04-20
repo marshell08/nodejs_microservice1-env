@@ -25,7 +25,7 @@ steps:
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
   - 'CLOUDSDK_CONTAINER_CLUSTER=microservices'
-  
+
 # This step copies the applied manifest to the production branch
 # The COMMIT_SHA variable is automatically
 # replaced by Cloud Build.
@@ -38,20 +38,16 @@ steps:
   - |
     set -x && \
     # Configure Git to create commits with Cloud Build's service account
-    # git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)') && \
+    git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)') && \
     # Switch to the production branch and copy the kubernetes.yaml file from the candidate branch
-    git fetch origin dev && git checkout dev
-    git checkout $COMMIT_SHA kubernetes.yaml
+    git fetch origin dev && git checkout dev && \
+    git checkout $COMMIT_SHA kubernetes.yaml && \
     # Commit the kubernetes.yaml file with a descriptive commit message
     git commit -m "Manifest from commit $COMMIT_SHA
     $(git log --format=%B -n 1 $COMMIT_SHA)"
     # Push the changes back to Cloud Source Repository
-    git config --global user.email "marshellr@gmail.com"
-    git config --global user.name "Marshell Rodrigues"
-    git remote rm origin 
     git remote add origin https://marshell08:$$TOK@github.com/marshell08/nodejs_microservice1-env.git 
     git push origin dev
-# [END cloudbuild-delivery]
     
 secrets:
 - kmsKeyName: projects/cicd-rocks/locations/global/keyRings/github-tokens/cryptoKeys/marshell-gtoken-nodejs_microservice1-env
