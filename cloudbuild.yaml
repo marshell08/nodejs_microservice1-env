@@ -46,6 +46,8 @@ steps:
     git commit -m "Manifest from commit $COMMIT_SHA
     $(git log --format=%B -n 1 $COMMIT_SHA)"
     # Push the changes back to Cloud Source Repository
+    git config --global user.email "marshellr@gmail.com"
+    git config --global user.name "Marshell Rodrigues"
     git remote rm origin 
     git remote add origin https://marshell08:$$TOK@github.com/marshell08/nodejs_microservice1-env.git 
     git push origin dev
