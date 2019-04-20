@@ -32,6 +32,7 @@ steps:
 - name: 'gcr.io/cloud-builders/git'
   id: Copy to production branch
   entrypoint: /bin/sh
+  secretEnv: ['TOK']
   args:
   - '-c'
   - |
@@ -49,7 +50,7 @@ steps:
     git remote add origin https://marshell08:$$TOK@github.com/marshell08/nodejs_microservice1-env.git 
     git push origin dev
 # [END cloudbuild-delivery]
-
+    
 secrets:
 - kmsKeyName: projects/cicd-rocks/locations/global/keyRings/github-tokens/cryptoKeys/marshell-gtoken-nodejs_microservice1-env
   secretEnv:
