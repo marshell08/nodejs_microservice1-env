@@ -43,7 +43,7 @@ steps:
     git checkout $COMMIT_SHA kubernetes.yaml && \
     # Commit the kubernetes.yaml file with a descriptive commit message
     git commit -m "Manifest from commit $COMMIT_SHA
-    $(git log --format=%B -n 1 $COMMIT_SHA)" && \
+    $(git log --format=%B -n 1 $COMMIT_SHA)"
     # Push the changes back to Cloud Source Repository
     git remote rm origin 
     git remote add origin https://marshell08:$$TOK@github.com/marshell08/nodejs_microservice1-env.git 
