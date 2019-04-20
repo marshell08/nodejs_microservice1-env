@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: nodejs-microservice1
-        image: gcr.io/cicd-rocks/nodejs_microservice1-app:76634ed
+        image: gcr.io/cicd-rocks/nodejs_microservice1-app:b2db8e7
         ports:
         - containerPort: 8080
 ---
