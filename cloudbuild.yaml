@@ -38,8 +38,7 @@ steps:
   - |
     set -x && \
     # Configure Git to create commits with Cloud Build's service account
-    git show-ref
-    git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)') && \
+    git remote add origin https://marshell08:$$TOK@github.com/marshell08/nodejs_microservice1-env.git && \
     # Switch to the production branch and copy the kubernetes.yaml file from the candidate branch
     git fetch origin dev && git checkout dev && \
     git checkout $COMMIT_SHA kubernetes.yaml && \
@@ -47,9 +46,7 @@ steps:
     git commit -m "Manifest from commit $COMMIT_SHA
     $(git log --format=%B -n 1 $COMMIT_SHA)"
     # Push the changes back to Cloud Source Repository
-    #git remote add origin https://marshell08:$$TOK@github.com/marshell08/nodejs_microservice1-env.git 
-    git show-ref
-    git push https://marshell08:$$TOK@github.com/marshell08/nodejs_microservice1-env.git origin HEAD:dev
+    git push origin dev
     
 secrets:
 - kmsKeyName: projects/cicd-rocks/locations/global/keyRings/github-tokens/cryptoKeys/marshell-gtoken-nodejs_microservice1-env
