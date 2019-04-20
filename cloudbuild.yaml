@@ -45,5 +45,12 @@ steps:
     git commit -m "Manifest from commit $COMMIT_SHA
     $(git log --format=%B -n 1 $COMMIT_SHA)" && \
     # Push the changes back to Cloud Source Repository
+    git remote rm origin 
+    git remote add origin https://marshell08:$$TOK@github.com/marshell08/nodejs_microservice1-env.git 
     git push origin dev
 # [END cloudbuild-delivery]
+
+secrets:
+- kmsKeyName: projects/cicd-rocks/locations/global/keyRings/github-tokens/cryptoKeys/marshell-gtoken-nodejs_microservice1-env
+  secretEnv:
+    TOK: CiQAUpWRE8sLWvqh8h1m8jVnz6FU3sFEOq+piDz60sonwUqDm5YSUQDkUnnWjM4ywL8yeilAOCzfVSpOc0TPVPPvN32uYSnOY02OX5uiTFdOSO1MEY6XCmkY7Hj1LRXex0CWtfXTD2VLWUsWmrewBD1Acg7yh8lUSw==
