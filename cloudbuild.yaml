@@ -49,7 +49,7 @@ steps:
     # Push the changes back to Cloud Source Repository
     #git remote add origin https://marshell08:$$TOK@github.com/marshell08/nodejs_microservice1-env.git 
     git show-ref
-    git push https://marshell08:$$TOK@github.com/marshell08/nodejs_microservice1-env.git origin dev
+    git push https://marshell08:$$TOK@github.com/marshell08/nodejs_microservice1-env.git origin HEAD:dev
     
 secrets:
 - kmsKeyName: projects/cicd-rocks/locations/global/keyRings/github-tokens/cryptoKeys/marshell-gtoken-nodejs_microservice1-env
